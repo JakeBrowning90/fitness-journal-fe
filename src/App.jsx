@@ -4,18 +4,48 @@ import "./reset.css";
 import "./style.css";
 import { Routes, Route, Link, useNavigate } from "react-router";
 
-import LoginScreen from "./components/LoginScreen";
 import HomeScreen from "./components/HomeScreen";
+import LoginScreen from "./components/LoginScreen";
+import SessionScreen from "./components/SessionScreen";
+// import ExerciseForm from "./components/ExerciseForm";
+import ProfileScreen from "./components/ProfileScreen";
 
 function App() {
+  const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
+
   return (
     <>
-      <header>Nav</header>
+      <header>
+        {/* <Link to={`/`}>Home</Link> */}
+        {localStorage.username ? (
+          <>
+            <a onClick={logout}>Log Out</a>
+          </>
+        ) : (
+          <>
+            {/* <Link to={`/signup`}>Sign Up</Link> */}
+            <Link to={`/login`}>Log In</Link>
+          </>
+        )}
+        <Link to={`/profile`}>Profile</Link>
+        <Link to={`/`}>Home</Link>
+        <Link to={`/newsession`}>Sessions</Link>
+      </header>
       <main>
         <Routes>
           {/* <Route path="" element={} /> */}
-          <Route path="login" element={<LoginScreen />} />
           <Route path="/" element={<HomeScreen />} />
+          <Route path="login" element={<LoginScreen />} />
+          <Route path="newsession" element={<SessionScreen />} />
+          {/* <Route path="editSession" element={SessionForm} />
+          <Route path="newExercise" element={ExerciseForm} />
+          <Route path="editExercise" element={ExerciseForm} /> */}
+          <Route path="profile" element={<ProfileScreen />} />
         </Routes>
       </main>
       <footer>App by Jake Browning, 2025</footer>
