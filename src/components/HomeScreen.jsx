@@ -42,6 +42,21 @@ function HomeScreen(
   return (
     <>
       <h1>Home Screen</h1>
+      <form action="">
+        <h2>Add Session</h2>
+        <label htmlFor="">Date:</label>
+        <input type="text" />
+        <label htmlFor="">Exercise:</label>
+        <input type="text" />
+
+        <label htmlFor="">Duration:</label>
+        <input type="text" />
+
+        <label htmlFor="">Distance:</label>
+        <input type="text" />
+        <label htmlFor="">Notes:</label>
+        <input type="text" />
+      </form>
       {content.length == 0 ? (
         <span>No sessions found</span>
       ) : (
