@@ -1,1 +1,102 @@
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  --color-bg-light: #fbfafa;
+  --color-body-dark: #333;
+  --color-text-light: #ffffff;
+  --color-text-dark: rgb(77, 77, 77);
+  --color-header-green: rgb(186, 248, 178);
+  --color-header-lightgreen: rgb(70, 165, 70);
 
+  --color-bg-1: #adffda;
+  --color-bg-2: linear-gradient(
+    90deg,
+    rgba(173, 255, 218, 1) 0%,
+    rgba(102, 181, 255, 1) 100%
+  );
+}
+
+* {
+}
+
+a {
+  text-decoration: underline;
+}
+
+button {
+  font-weight: bold;
+}
+
+input,
+select,
+option {
+}
+
+html,
+body,
+#root {
+  background-color: var(--color-bg-light);
+  height: 100%;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+header,
+main,
+footer {
+  padding: 10px;
+}
+
+header,
+footer {
+  background: var(--color-bg-1);
+  background: var(--color-bg-2);
+}
+
+main {
+  background-color: var(--color-bg-light);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+h2 {
+  font-size: 1.5rem;
+}
+
+nav {
+  display: flex;
+  gap: 10px;
+}
+
+.footerNav {
+  justify-content: space-around;
+}
+
+form {
+  background-color: var(--color-header-green);
+  display: flex;
+  flex-direction: column;
+  /* min-width: 400px; */
+  margin: 0 auto 10px auto;
+  padding: 20px 10px;
+  gap: 10px;
+  border-radius: 5px;
+}
+.formLabelInput {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}

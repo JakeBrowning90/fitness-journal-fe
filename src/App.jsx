@@ -21,20 +21,23 @@ function App() {
   return (
     <>
       <header>
-        {/* <Link to={`/`}>Home</Link> */}
-        {localStorage.username ? (
-          <>
-            <a onClick={logout}>Log Out</a>
-          </>
-        ) : (
-          <>
-            {/* <Link to={`/signup`}>Sign Up</Link> */}
-            <Link to={`/login`}>Log In</Link>
-          </>
-        )}
-        <Link to={`/profile`}>Profile</Link>
-        <Link to={`/`}>Home</Link>
-        <Link to={`/newsession`}>Sessions</Link>
+        <nav>
+          <Link to={`/profile`}>Profile</Link>
+
+          {/* <Link to={`/`}>Home</Link> */}
+          {localStorage.username ? (
+            <>
+              <a onClick={logout}>Log Out</a>
+            </>
+          ) : (
+            <>
+              {/* <Link to={`/signup`}>Sign Up</Link> */}
+              <Link to={`/login`}>Log In</Link>
+            </>
+          )}
+          <Link to={`/`}>Home</Link>
+          <Link to={`/newsession`}>Sessions</Link>
+        </nav>
       </header>
       <main>
         <Routes>
@@ -48,7 +51,16 @@ function App() {
           <Route path="profile" element={<ProfileScreen />} />
         </Routes>
       </main>
-      <footer>App by Jake Browning, 2025</footer>
+      <footer>
+        <nav className="footerNav">
+          <a href="">1</a>
+          <a href="">2</a>
+          <a href="">3</a>
+          <a href="">4</a>
+        </nav>
+
+        <span>App by Jake Browning, 2025</span>
+      </footer>
     </>
   );
 }

@@ -42,21 +42,7 @@ function HomeScreen(
   return (
     <>
       <h1>Home Screen</h1>
-      <form action="">
-        <h2>Add Session</h2>
-        <label htmlFor="">Date:</label>
-        <input type="text" />
-        <label htmlFor="">Exercise:</label>
-        <input type="text" />
-
-        <label htmlFor="">Duration:</label>
-        <input type="text" />
-
-        <label htmlFor="">Distance:</label>
-        <input type="text" />
-        <label htmlFor="">Notes:</label>
-        <input type="text" />
-      </form>
+      {/* Render list of dates w/ sessions */}
       {content.length == 0 ? (
         <span>No sessions found</span>
       ) : (
@@ -73,6 +59,35 @@ function HomeScreen(
           })}
         </ul>
       )}
+
+      <form action="">
+        <h2>Add Session</h2>
+        <div className="formLabelInput">
+          <label htmlFor="">Date:</label>
+          <input type="text" />
+        </div>
+
+        <div className="formLabelInput">
+          <label htmlFor="">Exercise:</label>
+          <input type="text" />
+        </div>
+
+        <div className="formLabelInput">
+          <label htmlFor="">Duration:</label>
+          <input type="text" />
+        </div>
+
+        <div className="formLabelInput">
+          <label htmlFor="">Distance:</label>
+          <input type="text" />
+        </div>
+
+        <div className="formLabelInput">
+          <label htmlFor="">Notes:</label>
+          <input type="text" />
+        </div>
+        <button>Submit</button>
+      </form>
     </>
   );
 }
