@@ -30,11 +30,19 @@ function HomeScreen(
       })
       .then((response) => {
         setContent(response);
-        console.log(response);
       })
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
   }, []);
+
+  // function handleFormInput(e) {
+  //   setFormInput(e.target.value);
+  // }
+
+  async function submitSession(e) {
+    e.preventDefault();
+    console.log("Submitted session");
+  }
 
   // Render
   if (loading) return <p>Loading...</p>;
@@ -60,7 +68,7 @@ function HomeScreen(
         </ul>
       )}
 
-      <form action="">
+      <form onSubmit={submitSession}>
         <h2>Add Session</h2>
         <div className="formLabelInput">
           <label htmlFor="">Date:</label>
