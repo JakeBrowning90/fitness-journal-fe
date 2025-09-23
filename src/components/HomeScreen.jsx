@@ -22,7 +22,7 @@ function HomeScreen(
 
   // Functions
   useEffect(() => {
-    fetch(apiSource + `session`, {
+    fetch(apiSource + `session/home`, {
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
