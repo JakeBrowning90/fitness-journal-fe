@@ -10,19 +10,21 @@ function HomeScreen(
   }
 ) {
   // State declarations
-  const [content, setContent] = useState([]);
+  const [sessions, setSessions] = useState([]);
+  const [exercises, setExercises] = useState([]);
   const [date, setDate] = useState("");
   const [exercise, setExercise] = useState("");
   const [duration, setDuration] = useState("");
   const [distance, setDistance] = useState("");
   const [notes, setNotes] = useState("");
+  const [submissionError, setSubmissionError] = useState(true);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   // Functions
   useEffect(() => {
-    fetch(apiSource + `session/home`, {
+    fetch(apiSource + `session/home/`, {
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +37,8 @@ function HomeScreen(
         return response.json();
       })
       .then((response) => {
-        setContent(response);
+        setSessions(response[0]);
+        setExercises(response[1]);
       })
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
@@ -68,6 +71,32 @@ function HomeScreen(
   async function submitSession(e) {
     e.preventDefault();
     console.log(date, exercise, duration, distance, notes);
+    const response = await fetch(apiSource + `session/`, {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user: 3,
+        date: new Date(date),
+        exercise: exercise,
+        duration: duration,
+        distance: distance,
+        notes: notes,
+      }),
+    });
+    const sessionResponse = await response.json();
+    console.log(sessionResponse);
+    if (Array.isArray(sessionResponse.errors)) {
+      setSubmissionError(true);
+      // TODO: display error message
+    } else {
+      setSubmissionError(false);
+      // TODO: Modal to verify clock-in?
+      // Redirect to home
+      window.location.href = `/`;
+    }
   }
 
   // Render
@@ -77,11 +106,11 @@ function HomeScreen(
     <>
       <h1>Home Screen</h1>
       {/* Render list of dates w/ sessions */}
-      {content.length == 0 ? (
+      {sessions.length == 0 ? (
         <span>No sessions found</span>
       ) : (
         <ul>
-          {content.map((session) => {
+          {sessions.map((session) => {
             return (
               <li key={session.id}>
                 <span>{session.date}</span>
@@ -108,12 +137,16 @@ function HomeScreen(
 
         <div className="formLabelInput">
           <label htmlFor="exerciseSelect">Exercise:</label>
-          <input
-            id="exerciseSelect"
-            type="text"
-            value={exercise}
-            onChange={handleExercise}
-          />
+          <select id="exerciseSelect" onChange={handleExercise}>
+            <option value="">-Select an exercise-</option>
+            {exercises.map((exercise) => {
+              return (
+                <option key={exercise.id} value={exercise.id}>
+                  {exercise.name}
+                </option>
+              );
+            })}
+          </select>
         </div>
 
         <div className="formLabelInput">
