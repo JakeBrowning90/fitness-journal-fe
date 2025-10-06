@@ -100,3 +100,12 @@ form {
   flex-direction: column;
   gap: 2px;
 }
+.sessionUL {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sessionLI {
+  display: flex;
+  gap: 10px;
+}

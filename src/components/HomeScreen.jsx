@@ -22,6 +22,21 @@ function HomeScreen(
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
   // Functions
   useEffect(() => {
     fetch(apiSource + `session/home/`, {
@@ -109,11 +124,14 @@ function HomeScreen(
       {sessions.length == 0 ? (
         <span>No sessions found</span>
       ) : (
-        <ul>
+        <ul className="sessionUL">
           {sessions.map((session) => {
+            let date = new Date(session.date);
             return (
-              <li key={session.id}>
-                <span>{session.date}</span>
+              <li key={session.id} className="sessionLI">
+                <span>
+                  {months[date.getMonth()]} {date.getDate() + 1}
+                </span>
                 <span>{session.exercise[0].name}</span>
                 <span>Distance: {session.distancek}</span>
                 <span>Time: {session.durationmin}</span>
