@@ -18,6 +18,7 @@ function HomeScreen(
   const [distance, setDistance] = useState("");
   const [notes, setNotes] = useState("");
   const [submissionError, setSubmissionError] = useState(true);
+  const [errorMessages, setErrorMessages] = useState([]);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -93,6 +94,7 @@ function HomeScreen(
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        // TODO: Get user from logged-in token
         user: 3,
         date: new Date(date),
         exercise: exercise,
@@ -105,6 +107,7 @@ function HomeScreen(
     console.log(sessionResponse);
     if (Array.isArray(sessionResponse.errors)) {
       setSubmissionError(true);
+      setErrorMessages(sessionResponse.errors);
       // TODO: display error message
     } else {
       setSubmissionError(false);
@@ -143,6 +146,13 @@ function HomeScreen(
 
       <form onSubmit={submitSession}>
         <h2>Add Session</h2>
+        {submissionError && (
+          <ul>
+            {errorMessages.map((error) => {
+              return <li key={error.msg}>{error.msg}</li>;
+            })}
+          </ul>
+        )}
         <div className="formLabelInput">
           <label htmlFor="dateInput">Date:</label>
           <input
