@@ -10,7 +10,7 @@ function HomeScreen(
   }
 ) {
   // State declarations
-  const [sessions, setSessions] = useState([]);
+  const [dates, setDates] = useState([]);
   const [exercises, setExercises] = useState([]);
   const [date, setDate] = useState("");
   const [exercise, setExercise] = useState("");
@@ -40,7 +40,7 @@ function HomeScreen(
 
   // Functions
   useEffect(() => {
-    fetch(apiSource + `session/home/`, {
+    fetch(apiSource + `date/home/`, {
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,8 @@ function HomeScreen(
         return response.json();
       })
       .then((response) => {
-        setSessions(response[0]);
+        console.log(response[0]);
+        setDates(response[0]);
         setExercises(response[1]);
       })
       .catch((error) => setError(error))
@@ -95,8 +96,8 @@ function HomeScreen(
       },
       body: JSON.stringify({
         // TODO: Get user from logged-in token
-        user: 3,
-        date: new Date(date),
+        user: 1,
+        date: date,
         exercise: exercise,
         duration: duration,
         distance: distance,
@@ -124,20 +125,36 @@ function HomeScreen(
     <>
       <h1>Home Screen</h1>
       {/* Render list of dates w/ sessions */}
-      {sessions.length == 0 ? (
+      {dates.length == 0 ? (
         <span>No sessions found</span>
       ) : (
         <ul className="sessionUL">
-          {sessions.map((session) => {
-            let date = new Date(session.date);
+          {dates.map((calDate) => {
+            let date = new Date(calDate.date);
             return (
-              <li key={session.id} className="sessionLI">
+              <li key={calDate.id} className="sessionLI">
                 <span>
                   {months[date.getMonth()]} {date.getDate() + 1}
                 </span>
-                <span>{session.exercise[0].name}</span>
+                {calDate.session.length == 0 ? (
+                  <span>No sessions</span>
+                ) : (
+                  <ul>
+                    {calDate.session.map((session) => {
+                      return (
+                        <li key={session.id}>
+                          <span>{session.exercise[0].name} Min</span>
+                          <span>{session.durationmin} Min</span>
+                          <span>{session.distancek} K</span>
+                          <span>{session.notes}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+                {/* <span>{session.exercise[0].name}</span>
                 <span>Distance: {session.distancek}</span>
-                <span>Time: {session.durationmin}</span>
+                <span>Time: {session.durationmin}</span> */}
               </li>
             );
           })}
