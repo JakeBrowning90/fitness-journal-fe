@@ -128,23 +128,26 @@ function HomeScreen(
       {dates.length == 0 ? (
         <span>No sessions found</span>
       ) : (
-        <ul className="sessionUL">
+        <ul className="dateUL">
           {dates.map((calDate) => {
             let date = new Date(calDate.date);
             return (
-              <li key={calDate.id} className="sessionLI">
-                <span>
-                  {months[date.getMonth()]} {date.getDate() + 1}
-                </span>
+              <li key={calDate.id} className="dateLI">
+                <div className="dateHeader">
+                  <span>{months[date.getMonth()]}</span>
+                  <span>{date.getDate() + 1}</span>
+                </div>
+
                 {calDate.session.length == 0 ? (
                   <span>No sessions</span>
                 ) : (
-                  <ul>
+                  // TODO link to session detail with breakdown & edit/delete
+                  <ul className="sessionUL">
                     {calDate.session.map((session) => {
                       return (
                         <li key={session.id}>
-                          <span>{session.exercise[0].name} Min</span>
-                          <span>{session.durationmin} Min</span>
+                          <span>{session.exercise[0].name}</span>
+                          <span>{session.durationmin} min</span>
                           <span>{session.distancek} K</span>
                           <span>{session.notes}</span>
                         </li>

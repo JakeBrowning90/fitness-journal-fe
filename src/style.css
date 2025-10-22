@@ -100,12 +100,33 @@ form {
   flex-direction: column;
   gap: 2px;
 }
+.dateUL {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.dateLI {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 10px;
+}
+
+.dateLI > * {
+  background-color: rgb(41, 221, 185);
+  padding: 10px;
+}
+
+.dateHeader {
+  border-radius: 50%;
+  height: 50px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
 .sessionUL {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.sessionLI {
-  display: flex;
-  gap: 10px;
-}
+
