@@ -146,10 +146,12 @@ function HomeScreen(
                     {calDate.session.map((session) => {
                       return (
                         <li key={session.id}>
-                          <span>{session.exercise[0].name}</span>
-                          <span>{session.durationmin} min</span>
-                          <span>{session.distancek} K</span>
-                          <span>{session.notes}</span>
+                          <a href={`/session/${session.id}`}>
+                            <span>{session.exercise[0].name}</span>
+                            <span>{session.durationmin} min</span>
+                            <span>{session.distancek} K</span>
+                            <span>{session.notes}</span>
+                          </a>
                         </li>
                       );
                     })}
