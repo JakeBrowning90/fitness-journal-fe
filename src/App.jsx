@@ -7,6 +7,8 @@ import { Routes, Route, Link, useNavigate } from "react-router";
 import HomeScreen from "./components/HomeScreen";
 import LoginScreen from "./components/LoginScreen";
 import SessionDetail from "./components/SessionDetail";
+import SessionEdit from "./components/SessionEdit";
+import SessionDelete from "./components/SessionDelete";
 
 // import SessionScreen from "./components/SessionScreen";
 // import ExerciseForm from "./components/ExerciseForm";
@@ -48,6 +50,9 @@ function App() {
           <Route path="login" element={<LoginScreen />} />
 
           <Route path="session/:sessionId" element={<SessionDetail />} />
+          <Route path="session/:sessionId/edit" element={<SessionEdit />} />
+          <Route path="session/:sessionId/delete" element={<SessionDelete />} />
+
           {/* <Route path="newsession" element={<SessionScreen />} /> */}
           {/* <Route path="editSession" element={SessionForm} />
           <Route path="newExercise" element={ExerciseForm} />

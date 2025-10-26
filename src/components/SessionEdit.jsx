@@ -4,7 +4,7 @@ import { Routes, Route, Link, useNavigate, useParams } from "react-router";
 // import apiSource
 import { apiSource } from "../apiSource";
 
-function SessionDetail(
+function SessionEdit(
   {
     // Props
   }
@@ -38,18 +38,19 @@ function SessionDetail(
   if (error) return <p>Network error, please try again later.</p>;
   return (
     <>
-      <h1>Session Detail</h1>
-      <a href="/">Home</a>
-      <span>{session.exercise[0].name}</span>
-      <span>{session.date[0].date}</span>
-      <span>{session.durationmin} Min</span>
-      <span>{session.distancek} K</span>
-      {session.notes && <span>Notes: {session.notes}</span>}
+      <h1>Session Edit</h1>
+      <a href={`/session/${session.id}`}>Back to Detail</a>
 
-      <a href={`${sessionId}/edit`}>Edit </a>
-      <a href={`${sessionId}/delete`}>Delete </a>
+      <form action="">
+        <span>{session.exercise[0].name}</span>
+        <span>{session.date[0].date}</span>
+        <span>{session.durationmin}</span>
+        <span>{session.distancek}</span>
+        <span>{session.notes}</span>
+        <button>Save TBA</button>
+      </form>
     </>
   );
 }
 
-export default SessionDetail;
+export default SessionEdit;
