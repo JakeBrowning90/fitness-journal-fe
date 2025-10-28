@@ -27,20 +27,35 @@ function SessionEdit(
 
   // Functions
   const { sessionId } = useParams();
+
   useEffect(() => {
-    fetch(apiSource + `session/${sessionId}`, {
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    async function fetchAll() {
+      const sessionResponse = await fetch(apiSource + `session/${sessionId}`, {
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const exercisesResponse = await fetch(apiSource + `exercise/`, {
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const session = await sessionResponse.json();
+      const exercises = await exercisesResponse.json();
+
+      return [session, exercises];
+    }
+
+    fetchAll()
       .then((response) => {
-        if (response.status >= 400) {
-          throw new Error("Fetch error");
-        }
-        return response.json();
+        console.log(response),
+          populateInputs(response[0]),
+          setExercises(response[1]);
       })
-      .then((response) => populateInputs(response))
+
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
   }, []);
@@ -111,7 +126,7 @@ function SessionEdit(
   if (error) return <p>Network error, please try again later.</p>;
   return (
     <>
-      <a href={`/session/${session.id}`}>Back to Detail</a>
+      <a href={`/session/${sessionId}`}>Back to Detail</a>
 
       <form onSubmit={submitSessionEdit}>
         <h2>Edit Session</h2>
@@ -136,13 +151,13 @@ function SessionEdit(
           <label htmlFor="exerciseSelect">Exercise:</label>
           <select id="exerciseSelect" onChange={handleExercise}>
             <option value="">-Select an exercise-</option>
-            {/* {exercises.map((exercise) => {
+            {exercises.map((exercise) => {
               return (
                 <option key={exercise.id} value={exercise.id}>
                   {exercise.name}
                 </option>
               );
-            })} */}
+            })}
           </select>
         </div>
 
