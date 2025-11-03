@@ -91,8 +91,8 @@ function SessionEdit(
   async function submitSessionEdit(e) {
     e.preventDefault();
     console.log(date, exercise, duration, distance, notes);
-    const response = await fetch(apiSource + `session/`, {
-      method: "POST",
+    const response = await fetch(apiSource + `session/` + sessionId, {
+      method: "PUT",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
@@ -109,16 +109,16 @@ function SessionEdit(
     });
     const sessionResponse = await response.json();
     console.log(sessionResponse);
-    if (Array.isArray(sessionResponse.errors)) {
-      setSubmissionError(true);
-      setErrorMessages(sessionResponse.errors);
-      // TODO: display error message
-    } else {
-      setSubmissionError(false);
-      // TODO: Modal to verify clock-in?
-      // Redirect to home
-      window.location.href = `/`;
-    }
+    // if (Array.isArray(sessionResponse.errors)) {
+    //   setSubmissionError(true);
+    //   setErrorMessages(sessionResponse.errors);
+    //   // TODO: display error message
+    // } else {
+    //   setSubmissionError(false);
+    //   // TODO: Modal to verify clock-in?
+    //   // Redirect to home
+    //   window.location.href = `/`;
+    // }
   }
 
   // Render
