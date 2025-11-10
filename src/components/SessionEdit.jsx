@@ -22,7 +22,7 @@ function SessionEdit(
   const [distance, setDistance] = useState("");
   const [notes, setNotes] = useState("");
 
-  const [submissionError, setSubmissionError] = useState(true);
+  const [submissionError, setSubmissionError] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
 
   // Functions
