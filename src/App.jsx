@@ -9,6 +9,7 @@ import LoginScreen from "./components/LoginScreen";
 import SessionDetail from "./components/SessionDetail";
 import SessionEdit from "./components/SessionEdit";
 import SessionDelete from "./components/SessionDelete";
+import SessionFormView from "./components/SessionFormView";
 
 // import SessionScreen from "./components/SessionScreen";
 // import ExerciseForm from "./components/ExerciseForm";
@@ -53,7 +54,7 @@ function App() {
           <Route path="session/:sessionId/edit" element={<SessionEdit />} />
           <Route path="session/:sessionId/delete" element={<SessionDelete />} />
 
-          {/* <Route path="newsession" element={<SessionScreen />} /> */}
+          <Route path="newsession" element={<SessionFormView />} />
           {/* <Route path="editSession" element={SessionForm} />
           <Route path="newExercise" element={ExerciseForm} />
           <Route path="editExercise" element={ExerciseForm} /> */}
