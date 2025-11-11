@@ -26,7 +26,7 @@ function SessionFormView(
 
   // Functions
     useEffect(() => {
-      fetch(apiSource + `opportunity`, {
+      fetch(apiSource + `exercise`, {
         mode: "cors",
         headers: {
           "Content-Type": "application/json",
@@ -38,7 +38,7 @@ function SessionFormView(
           }
           return response.json();
         })
-        .then((response) => setContent(response))
+        .then((response) => setExercises(response))
         .catch((error) => setError(error))
         .finally(() => setLoading(false));
     }, []);
