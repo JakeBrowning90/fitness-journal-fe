@@ -149,3 +149,7 @@ form {
   flex-direction: column;
   gap: 10px;
 }
+
+.sessionLI {
+  display: flex;
+}

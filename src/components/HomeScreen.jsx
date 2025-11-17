@@ -95,11 +95,22 @@ function HomeScreen(
                       {calDate.session.map((session) => {
                         return (
                           <li key={session.id}>
-                            <a href={`/session/${session.id}`}>
+                            <a
+                              href={`/session/${session.id}`}
+                              className="sessionLI"
+                            >
                               <span>{session.exercise[0].name}</span>
-                              <span>{session.durationmin} min</span>
-                              <span>{session.distancek} K</span>
-                              <span>{session.notes}</span>
+
+                              {/* Conditionally render time */}
+                              {session.durationmin && (
+                                <span> - {session.durationmin} min</span>
+                              )}
+
+                              {/* Conditionally render distance */}
+                              {session.distancek && (
+                                <span>- {session.distancek} K</span>
+                              )}
+                              {/* <span>{session.notes}</span> */}
                             </a>
                           </li>
                         );
