@@ -193,7 +193,7 @@ function SessionEdit(
             onChange={handleNotes}
           />
         </div>
-        <button>Save Edits TBA</button>
+        <button>Save Edits</button>
       </form>
     </>
   );
