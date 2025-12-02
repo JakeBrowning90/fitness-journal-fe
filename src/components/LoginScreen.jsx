@@ -15,41 +15,36 @@ function LoginScreen(
   const [error, setError] = useState(null);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState([]);
+  const [invalidLogin, setInvalidLogin] = useState(false);
 
   // Functions
   async function submitLogin(e) {
     e.preventDefault();
-    console.log(username, password)
-    // const response = await fetch(apiSource + "user/login", {
-    //   method: "POST",
-    //   mode: "cors",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     username: username,
-    //     password: password,
-    //   }),
-    // });
-    // if (response.status != 200) {
-    //   setInvalidLogin(true);
-    // } else {
-    //   const loginResponse = await response.json();
-    //   console.log(loginResponse);
-    //   // localStorage.setItem("", loginResponse.);
-    //   localStorage.setItem("username", loginResponse.username);
-    //   localStorage.setItem("id", loginResponse.id);
-    //   localStorage.setItem("role", loginResponse.role);
-    //   localStorage.setItem(
-    //     "opportunity",
-    //     JSON.stringify(loginResponse.opportunity)
-    //   );
-
-    //   localStorage.setItem("token", `Bearer ${loginResponse.token}`);
-    //   setInvalidLogin(false);
-    //   // Redirect to dashboard
-    //   window.location.href = "/";
-    // }
+    console.log(username, password);
+    const response = await fetch(apiSource + "user/login", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    });
+    if (response.status != 200) {
+      setInvalidLogin(true);
+    } else {
+      const loginResponse = await response.json();
+      console.log(loginResponse);
+      // localStorage.setItem("", loginResponse.);
+      localStorage.setItem("username", loginResponse.username);
+      localStorage.setItem("id", loginResponse.id);
+      localStorage.setItem("token", `Bearer ${loginResponse.token}`);
+      setInvalidLogin(false);
+      // Redirect to dashboard
+      window.location.href = "/";
+    }
   }
 
   function handleUsername(e) {
@@ -67,6 +62,8 @@ function LoginScreen(
     <>
       <form onSubmit={submitLogin}>
         <h1>Log In</h1>
+        {invalidLogin && <p>Invalid login</p>}
+
         <div className="formLabelInput">
           <label htmlFor="">Username:</label>
           <input
