@@ -41,7 +41,7 @@ function ProtectedRoute({
   if (error) return <p>Network error, please try again later.</p>;
   
   // Immediately redirect if no credentials at all
-  if (!localStorage.getItem("token") || !localStorage.getItem("isConfirmed")) {
+  if (!localStorage.getItem("token")) {
     return navigate("/login");
   }
 

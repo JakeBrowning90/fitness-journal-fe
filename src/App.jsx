@@ -4,6 +4,9 @@ import "./reset.css";
 import "./style.css";
 import { Routes, Route, Link, useNavigate } from "react-router";
 
+import ProtectedRoute from "./components/ProtectedRoute";
+//Test route - delete after
+import LoggedInOnly from "./components/LoggedInOnly";
 import HomeScreen from "./components/HomeScreen";
 import LoginScreen from "./components/LoginScreen";
 import SessionDetail from "./components/SessionDetail";
@@ -42,6 +45,7 @@ function App() {
           )}
           <Link to={`/`}>Home</Link>
           <Link to={`/newsession`}>Sessions</Link>
+          <Link to={`/protecttest`}>Protected</Link>
         </nav>
       </header>
       <main>
@@ -59,6 +63,14 @@ function App() {
           <Route path="newExercise" element={ExerciseForm} />
           <Route path="editExercise" element={ExerciseForm} /> */}
           <Route path="profile" element={<ProfileScreen />} />
+          <Route
+            path="protectTest"
+            element={
+              <ProtectedRoute>
+                <LoggedInOnly />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </main>
       <footer>
